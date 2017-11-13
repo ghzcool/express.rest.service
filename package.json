@@ -1,11 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "express-rest-service",
   "description": "Create REST service for publishing with express",
   "repository": { 
     "type": "git",
     "url": "https://github.com/ghzcool/express.rest.service.git"
   },
+  "license": "MIT",
   "engines": {
     "node": ">=6.10"
   },

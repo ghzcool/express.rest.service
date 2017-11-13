@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin:0;padding:0;overflow:hidden;">
+	<a href="/demo?e=1b=asd" target="frame">Demo1</a>
+	<a href="/demo2?start=0&limit=10" target="frame">Demo2</a>
+	<form method="post" name="post" target="frame" action="/post">
+		<label>First name <input name="firstName"></label>
+		<label>Last name <input name="lastName"></label>
+		<input type="submit" value="Demo3"/>
+	</form>
+	<form method="post" name="put" target="frame" action="/put">
+		<label>First name <input name="firstName"></label>
+		<label>Last name <input name="lastName"></label>
+		<label>1 <input name="1"></label>
+		<label>2 <input name="2"></label>
+		<input type="submit" value="Demo4"/>
+	</form>
+	<form method="post" name="delete" target="frame" action="/delete">
+		<label>ID <input type="number" name="id"></label>
+		<input type="submit" value="Demo5"/>
+	</form>
+	<iframe name="frame" src="" frameborder="0" style="width:100vw;height:90vh;"></iframe>
+</body>
+</html>

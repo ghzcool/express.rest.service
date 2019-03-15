@@ -14,6 +14,8 @@ const MyRESTService = function (_config) {
 			callback(true, true); //loggedIn, hasAccess
 		}
 	};
+	const ERROR_VALUE_IS_MISSING = 'MISSING';
+	const ERROR_PARSING_TO_TYPE = 'PARSING';
 	const config = Object.assign(defaults, _config);
 	/**
 	 * roundTo
@@ -106,6 +108,7 @@ const MyRESTService = function (_config) {
 					status: loggedIn ? 403 : 401,
 					message: loggedIn ? "Unauthorized" : "Unauthenticated",
 					errors: ["Access Prohibited"],
+					fields: {},
 					headers: {
 						"WWW-Authenticate": 'Token realm="Access to the system"'
 					}
@@ -114,6 +117,7 @@ const MyRESTService = function (_config) {
 			else {
 				let withError = false;
 				const errors = [];
+				const fields = {};
 				const query = request.method === "GET" ? request.query : request.body;
 				const keys = Object.keys(config.args);
 				for(let i = 0; i < keys.length; i++) {
@@ -124,6 +128,7 @@ const MyRESTService = function (_config) {
 						if(!query[key]) {
 							withError = true;
 							errors.push("Mandatory parameter '" + key + "' is missing");
+							fields[key] = {error: ERROR_VALUE_IS_MISSING, data: null};
 						}
 					}
 					//type
@@ -138,6 +143,7 @@ const MyRESTService = function (_config) {
 					if(value.withError) {
 						withError = true;
 						errors.push("Unable to parse parameter '" + key + "' with value '" + query[key] + "' to type '" + type + "'");
+						fields[key] = {error: ERROR_PARSING_TO_TYPE, data: {value: query[key], type: type}};
 					}
 					service.args[key] = value.parsed;
 				}
@@ -148,7 +154,8 @@ const MyRESTService = function (_config) {
 					_service.failure({
 						status: 400,
 						message: "Bad Request",
-						errors
+						errors,
+						fields
 					}, response);
 				}
 			}
@@ -173,6 +180,7 @@ const MyRESTService = function (_config) {
 			error: true,
 			status: "object" === typeof error ? error.status : "500",
 			errors: error.errors || [],
+			fields: error.fields || {},
 			message: ("object" === typeof error ? error.message : String(error)) || "Unhandled exception"
 		};
 		response.writeHead(

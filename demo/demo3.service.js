@@ -1,7 +1,5 @@
 const MyRESTService = require("../index.js");
-
-var Datastore = require('nedb')
-  , db = new Datastore({ filename: __dirname + '/demo.db', autoload: true });
+const DemoDatabase = require("./demo.database.js");
 
 const Demo3Service = function () {
 	return new MyRESTService({
@@ -10,7 +8,7 @@ const Demo3Service = function () {
 			lastName: true
 		},
 		fn: (service, request, response) => {
-			db.loadDatabase(function (error) {
+			DemoDatabase.loadDatabase(function (error) {
 				if(error) {
 					service.failure({
 						status: 500,
@@ -19,7 +17,7 @@ const Demo3Service = function () {
 					});
 				}
 				else {
-					db.insert({
+					DemoDatabase.insert({
 						firstName: service.args.firstName,
 						lastName: service.args.lastName
 					}, (error, newDoc) => {

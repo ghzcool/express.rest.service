@@ -1,8 +1,8 @@
 {
-  "version": "1.0.1",
+  "version": "1.2.0",
   "name": "express-rest-service",
   "description": "Create REST service for publishing with express",
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "https://github.com/ghzcool/express.rest.service.git"
   },
@@ -11,15 +11,15 @@
     "node": ">=6.10"
   },
   "dependencies": {
-	"moment": "2.13.0"
+    "moment": "^2.24.0"
   },
   "devDependencies": {
-    "express": "4.15.3",
-	"body-parser": "1.18.2",
-	"nedb": "1.8.0"
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
+    "nedb": "^1.8.0"
   },
   "main": "index.js",
   "scripts": {
-	"start": "node demo/demo.js"
+    "start": "node demo/demo.js"
   }
 }

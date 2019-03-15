@@ -1,6 +1,6 @@
 const MyRESTService = require("../index.js");
 
-const Demo3Service = function () {
+const Demo4Service = function () {
 	return new MyRESTService({
 		args: {
 			id: {
@@ -18,4 +18,4 @@ const Demo3Service = function () {
 	});
 };
 
-module.exports = Demo3Service;
+module.exports = Demo4Service;
